@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifiez votre profil</h1>
+    
+{{ form_start(editform) }}
+	<div class="row">
+		<div class="col-md-6">{{form_row(editform.name, {"label": "Nom", "attr" : {"placeholder":"Votre nom"}}) }}</div>
+		<div class="col-md-6">{{form_row(editform.firstname, {"label": "Prénom", "attr" : {"placeholder":"Votre prénom"}})}}</div>
+		<div class="col-md-12">{{form_row(editform.pseudo, {"label": "Pseudonyme", "attr" : {"placeholder":"Pseudonyme que verront les autres utilisateurs (10 caractères minimum)"}})}}</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">{{form_row(editform.mail_adress, {"label": "Adresse Mail", "attr" : {"placeholder":"Votre adresse mail"}})}}</div>
+		<div class="col-md-4">{{form_row(editform.birthday, {"label": "Date de naissance"})}}</div>
+		<div class="col-md-4">{{form_row(editform.sex, {"label": "Sexe"})}}</div>
+	</div>
+	<div class="form-group">
+		<input placeholder ="Veuillez renseigner votre mot de passe pour confirmer" required name="_password" type="password" class="form-control">
+	</div>
+		
+	<button class="btn btn-primary">
+		Editer
+	</button>
+	{{ form_end(editform) }}
+    <form method="post" action="{{ path('delete', {'id': user.id}) }}" onsubmit="return confirm('Voulez vous supprimez définitivement votre comtpe??');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+    <label>Voulez vous supprimez votre compte?</label>
+    <button class="btn btn-warning">Supprimer</button>
+</form>
+  
+{% endblock %} 
