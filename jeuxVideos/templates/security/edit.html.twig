@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifiez votre profil</h1>
+    
+{{ form_start(editform) }}
+	<div class="row">
+		<div class="col-md-6">{{form_row(editform.name, {"label": "Nom", "attr" : {"placeholder":"Votre nom"}}) }}</div>
+		<div class="col-md-6">{{form_row(editform.firstname, {"label": "Prénom", "attr" : {"placeholder":"Votre prénom"}})}}</div>
+		<div class="col-md-12">{{form_row(editform.pseudo, {"label": "Pseudonyme", "attr" : {"placeholder":"Pseudonyme que verront les autres utilisateurs (10 caractères minimum)"}})}}</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">{{form_row(editform.mail_adress, {"label": "Adresse Mail", "attr" : {"placeholder":"Votre adresse mail"}})}}</div>
+		<div class="col-md-4">{{form_row(editform.birthday, {"label": "Date de naissance"})}}</div>
+		<div class="col-md-4">{{form_row(editform.sex, {"label": "Sexe"})}}</div>
+	</div>
+		{{ form_rest(editform) }}
+	<button class="btn btn-primary">
+		Editer
+	</button>
+	{{ form_end(editform) }}
+	<p class="mt-4">Voulez vous supprimer votre compte?</p>
+    <button class="btn btn-warning" href="{{ path('delete', {'id': user.id}) }}">Delete</button>
+  
+{% endblock %} 
