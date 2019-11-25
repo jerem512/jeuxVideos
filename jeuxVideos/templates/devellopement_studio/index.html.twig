@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DevellopementStudio index{% endblock %}
+
+{% block body %}
+    <h1>DevellopementStudio index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>DateOfCreation</th>
+                <th>WebSiteLink</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for devellopement_studio in devellopement_studios %}
+            <tr>
+                <td>{{ devellopement_studio.id }}</td>
+                <td>{{ devellopement_studio.name }}</td>
+                <td>{{ devellopement_studio.dateOfCreation ? devellopement_studio.dateOfCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ devellopement_studio.webSiteLink }}</td>
+                <td>
+                    <a href="{{ path('devellopement_studio_show', {'id': devellopement_studio.id}) }}">show</a>
+                    <a href="{{ path('devellopement_studio_edit', {'id': devellopement_studio.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('devellopement_studio_new') }}">Create new</a>
+{% endblock %}
