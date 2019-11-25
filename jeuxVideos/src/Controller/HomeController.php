@@ -1,12 +1,13 @@
 <?php
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomeController
+class HomeController extends AbstractController
 {
     public function index(): Response
     {
-        return new Response('yolo');
+        return $this->render('pages/home.html.twig');
     }
 }
