@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="text-center">Création de votre compte</h1>
+{{ form_start(formNew) }}
+	<div class="row">
+		<div class="offset-md-1 col-md-5">{{form_row(formNew.name, {"label": "Nom :", "attr" : {"placeholder":"Votre nom"}}) }}</div>
+		<div class="col-md-5">{{form_row(formNew.firstname, {"label": "Prénom :", "attr" : {"placeholder":"Votre prénom"}})}}</div>
+		<div class="offset-md-1 col-md-10">{{form_row(formNew.pseudo, {"label": "Pseudonyme :", "attr" : {"placeholder":"Pseudonyme que verront les autres utilisateurs (10 caractères minimum)"}})}}</div>
+	</div>
+	<div class="row">
+		<div class="offset-md-1 col-md-5">{{form_row(formNew.password, {"label": "Mot de passe :", "attr" : {"placeholder":"Votre mot de passe (8 caractères minimum)"}})}}</div>
+		<div class="col-md-5">{{form_row(formNew.confirm_password, {"label": "Confirmation du mot de passe :", "attr" : {"placeholder":"Confirmez votre mot de passe"}})}}</div>
+		<div class="offset-md-1 col-md-3">{{form_row(formNew.mail_adress, {"label": "Adresse Mail :", "attr" : {"placeholder":"Votre adresse mail"}})}}</div>
+		<div class="col-md-3">{{form_row(formNew.birthday, {"label": "Date de naissance :"})}}</div>
+		<div class="col-md-4">{{form_row(formNew.sex, {"label": "Sexe :"})}}</div>
+	</div>
+		{{ form_rest(formNew) }}
+	<div class="row">
+		<button class="btn btn-primary btn-block offset-md-1 col-md-10">Créer un compte</button>
+	</div>
+
+	{{ form_end(formNew) }}
+
+{% endblock %}

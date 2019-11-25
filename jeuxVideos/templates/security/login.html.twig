@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="text-center">Connexion</h1>
+
+<form action="{{path('s_login')}}" method="post" class="text-center">
+	<label for="_username" >Votre nom de compte :</label>
+	<div class="form-group row">
+		<input placeholder ="Veuillez renseigner votre pseudo" required name="_username" type="text" class="form-control offset-md-1 col-md-10">
+	</div>
+	<label for=_password">Votre mot de passe :</label>
+	<div class="form-group row">
+		<input placeholder ="Veuillez renseigner votre mot de passe" required name="_password" type="password" class="form-control offset-md-1 col-md-10">
+	</div>
+	<div class="form-group row">
+		<button type="submit" class="btn btn-primary btn-block offset-md-1 col-md-10">Connexion</button>
+	</div>
+</form>
+
+<p class="text-center">Pas encore inscrit? <a href="{{path('register')}}">Ne perd pas une minute!</a></p>
+{% endblock %}

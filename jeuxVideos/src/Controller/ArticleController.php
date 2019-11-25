@@ -22,7 +22,7 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
-            'current_menu' => 'article'
+            'current_menu' => 'articles'
         ]);
     }
 

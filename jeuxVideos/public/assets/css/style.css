@@ -1,0 +1,13 @@
+img{
+    width: 100%;
+}
+.hover a{
+    color:white;
+}
+.hover a:hover{
+    background-color: grey;
+    color:white;
+}
+.but{
+    margin-right: 25%;
+}
