@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,7 +26,7 @@ class Article
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private $descritpion;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,34 +34,26 @@ class Article
     private $note;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Publisher", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $editor;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="App\Entity\DevellopementStudio", inversedBy="articles")
      */
-    private $studio_development;
+    private $development_studio;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Platform", inversedBy="articles")
      */
-    private $link_page;
+    private $platform;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $release_date;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $date_creation_article;
+    public function __construct()
+    {
+        $this->development_studio = new ArrayCollection();
+        $this->platform = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,14 +72,14 @@ class Article
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescritpion(): ?string
     {
-        return $this->description;
+        return $this->descritpion;
     }
 
-    public function setDescription(string $description): self
+    public function setDescritpion(string $descritpion): self
     {
-        $this->description = $description;
+        $this->descritpion = $descritpion;
 
         return $this;
     }
@@ -102,74 +96,66 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    public function getEditor(): ?string
+    public function getEditor(): ?Publisher
     {
         return $this->editor;
     }
 
-    public function setEditor(string $editor): self
+    public function setEditor(?Publisher $editor): self
     {
         $this->editor = $editor;
 
         return $this;
     }
 
-    public function getStudioDevelopment(): ?string
+    /**
+     * @return Collection|DevellopementStudio[]
+     */
+    public function getDevelopmentStudio(): Collection
     {
-        return $this->studio_development;
+        return $this->development_studio;
     }
 
-    public function setStudioDevelopment(string $studio_development): self
+    public function addDevelopmentStudio(DevellopementStudio $developmentStudio): self
     {
-        $this->studio_development = $studio_development;
+        if (!$this->development_studio->contains($developmentStudio)) {
+            $this->development_studio[] = $developmentStudio;
+        }
 
         return $this;
     }
 
-    public function getLinkPage(): ?string
+    public function removeDevelopmentStudio(DevellopementStudio $developmentStudio): self
     {
-        return $this->link_page;
-    }
-
-    public function setLinkPage(string $link_page): self
-    {
-        $this->link_page = $link_page;
+        if ($this->development_studio->contains($developmentStudio)) {
+            $this->development_studio->removeElement($developmentStudio);
+        }
 
         return $this;
     }
 
-    public function getReleaseDate(): ?\DateTimeInterface
+    /**
+     * @return Collection|Platform[]
+     */
+    public function getPlatform(): Collection
     {
-        return $this->release_date;
+        return $this->platform;
     }
 
-    public function setReleaseDate(\DateTimeInterface $release_date): self
+    public function addPlatform(Platform $platform): self
     {
-        $this->release_date = $release_date;
+        if (!$this->platform->contains($platform)) {
+            $this->platform[] = $platform;
+        }
 
         return $this;
     }
 
-    public function getDateCreationArticle(): ?\DateTimeInterface
+    public function removePlatform(Platform $platform): self
     {
-        return $this->date_creation_article;
-    }
-
-    public function setDateCreationArticle(\DateTimeInterface $date_creation_article): self
-    {
-        $this->date_creation_article = $date_creation_article;
+        if ($this->platform->contains($platform)) {
+            $this->platform->removeElement($platform);
+        }
 
         return $this;
     }

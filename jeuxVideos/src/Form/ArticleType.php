@@ -3,6 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\DevellopementStudio;
+use App\Entity\Platform;
+use App\Entity\Publisher;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,14 +18,23 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('descritpion')
             ->add('note')
-            ->add('author')
-            ->add('editor')
-            ->add('studio_development')
-            ->add('link_page')
-            ->add('release_date')
-            ->add('date_creation_article')
+            ->add('editor', EntityType::class, [
+                'class' => Publisher::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+            ])
+            ->add('development_studio', EntityType::class, [
+                'class' => DevellopementStudio::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+            ])
+            ->add('platform', EntityType::class, [
+                'class' => Platform::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+            ])
         ;
     }
 
